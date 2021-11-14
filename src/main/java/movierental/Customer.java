@@ -3,6 +3,7 @@ package movierental;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * A customer who rents movies.
@@ -37,27 +38,30 @@ public class Customer {
 	 * @return the statement as a String
 	 */
 	public String statement() {
-		double totalAmount = 0; // total charges
-		int frequentRenterPoints = 0; // frequent renter points
-		StringBuilder stmt = "Rental Report for " + getName() + "\n\n");
-		// header for details section
-		stmt += composeHeader();
+		double totalAmount = 
+			rentals.stream()
+				.mapToDouble(this::computeRentalAmount)
+				.sum(); // total charges
 		
-		for (Rental rental: rentals) {
-			// compute rental change
-			totalAmount += computeRentalAmount(rental);
-			// award renter points for each rental
-			frequentRenterPoints += getFrequentRenterPoints(rental);
-			// one line of detail for this movie
-			stmt = computeStatementLine(rental);
-		}
+		int frequentRenterPoints =
+			rentals.stream()
+				.mapToInt(this::getFrequentRenterPoints)
+				.sum(); // frequent renter points
+
+		String stmt = composeHeader();
+		stmt += 
+			rentals.stream()
+				.map(this::computeStatementLine)
+				.collect(Collectors.joining()); // header for details section
+		
 
 		stmt += composeFooter(totalAmount, frequentRenterPoints);		
 		return stmt.toString();
 	}
 
 	public String composeHeader() {
-		return String.format("%-40.40s %4s %-8s\n", "Movie Title", "Days", "Price");
+		return "Rental Report for " + getName() + "\n\n" 
+			+ String.format("%-40.40s %4s %-8s\n", "Movie Title", "Days", "Price");
 	}
 
 	public String composeFooter(double totalAmount, int frequentRenterPoints) {
@@ -66,7 +70,7 @@ public class Customer {
 	}
 
 	public double computeRentalAmount(Rental rental) {
-		int amount = 0;
+		double amount = 0;
 		switch( rental.getMovie().getPriceCode() ) {
 			case Movie.REGULAR:
 				amount = 2;
@@ -96,8 +100,8 @@ public class Customer {
 		return 1;
 	}
 
-	public String computeStatementLine(Rental rental, int thisAmount) {
-		return String.format("%-40.40s %3d %8.2f\n", rental.getMovie().getTitle(), rental.getDaysRented(), thisAmount)
+	public String computeStatementLine(Rental rental) {
+		return String.format("%-40.40s %3d\n", rental.getMovie().getTitle(), rental.getDaysRented());
 	}
 
 	/** Get a logger object. */
