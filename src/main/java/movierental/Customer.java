@@ -38,25 +38,24 @@ public class Customer {
 	 * @return the statement as a String
 	 */
 	public String statement() {
-		double totalAmount = 
-			rentals.stream()
-				.mapToDouble(this::computeRentalAmount)
-				.sum(); // total charges
-		
-		int frequentRenterPoints =
-			rentals.stream()
-				.mapToInt(this::getFrequentRenterPoints)
-				.sum(); // frequent renter points
+		double totalAmount = 0; // total charges
+		int frequentRenterPoints = 0; // frequent renter points
+		String stmt = "Rental Report for " + getName() + "\n\n";
+		// header for details section
+		stmt += composeHeader();
 
-		String stmt = composeHeader();
-		stmt += 
-			rentals.stream()
-				.map(this::computeStatementLine)
-				.collect(Collectors.joining()); // header for details section
-		
+		for (Rental rental: rentals) {
+			double thisAmount = computeRentalAmount(rental);
+			// compute rental change
+			totalAmount += thisAmount;
+			// award renter points for each rental
+			frequentRenterPoints += getFrequentRenterPoints(rental);
+			// one line of detail for this movie
+			stmt += computeStatementLine(rental, thisAmount);
+		}
 
 		stmt += composeFooter(totalAmount, frequentRenterPoints);		
-		return stmt.toString();
+		return stmt;
 	}
 
 	public String composeHeader() {
@@ -100,8 +99,8 @@ public class Customer {
 		return 1;
 	}
 
-	public String computeStatementLine(Rental rental) {
-		return String.format("%-40.40s %3d\n", rental.getMovie().getTitle(), rental.getDaysRented());
+	public String computeStatementLine(Rental rental, double thisAmount) {
+		return String.format("%-40.40s %4d %.2f\n", rental.getMovie().getTitle(), rental.getDaysRented(), thisAmount);
 	}
 
 	/** Get a logger object. */
