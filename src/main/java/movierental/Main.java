@@ -13,6 +13,7 @@ public class Main {
         };
         
         Customer customer = new Customer("Edward Snowden");
+        int days = 1;
         for (Movie m: movies) {
             customer.addRental(new Rental(m, days));
             days++;
