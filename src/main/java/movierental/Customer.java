@@ -3,7 +3,6 @@ package movierental;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * A customer who rents movies.
@@ -45,13 +44,12 @@ public class Customer {
 		stmt += composeHeader();
 
 		for (Rental rental: rentals) {
-			double thisAmount = computeRentalAmount(rental);
 			// compute rental change
-			totalAmount += thisAmount;
+			totalAmount += computeRentalAmount(rental);
 			// award renter points for each rental
 			frequentRenterPoints += getFrequentRenterPoints(rental);
 			// one line of detail for this movie
-			stmt += computeStatementLine(rental, thisAmount);
+			stmt += computeStatementLine(rental);
 		}
 
 		stmt += composeFooter(totalAmount, frequentRenterPoints);		
@@ -89,6 +87,7 @@ public class Customer {
 			default:
 				getLogger().warning("Movie "+rental.getMovie()+" has unrecognized priceCode "+rental.getMovie().getPriceCode());
 		}
+		rental.setCharge(amount);
 		return amount;
 	}
 
@@ -99,8 +98,8 @@ public class Customer {
 		return 1;
 	}
 
-	public String computeStatementLine(Rental rental, double thisAmount) {
-		return String.format("%-40.40s %4d %.2f\n", rental.getMovie().getTitle(), rental.getDaysRented(), thisAmount);
+	public String computeStatementLine(Rental rental) {
+		return String.format("%-40.40s %4d %.2f\n", rental.getMovie().getTitle(), rental.getDaysRented(), rental.getCharge());
 	}
 
 	/** Get a logger object. */

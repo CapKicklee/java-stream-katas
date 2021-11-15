@@ -4,6 +4,7 @@ public class Rental {
 
     private Movie movie;
 	private int daysRented;
+	private double charge;
 	
 	/** Initialize a new movie rental object for
 	 * a movie with known rental period (daysRented).
@@ -25,6 +26,14 @@ public class Rental {
 	 */
 	public int getDaysRented() {
 		return daysRented;
+	}
+
+	public double getCharge() {
+		return charge;
+	}
+
+	public void setCharge(double charge) {
+		this.charge = charge;
 	}
 
 }
