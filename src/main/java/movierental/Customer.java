@@ -56,9 +56,8 @@ public class Customer {
 
 		// one line of detail for this movie
 		stmt += rentals.stream().map(this::computeStatementLine).collect(Collectors.joining());
-
-
 		stmt += composeFooter(totalAmount, frequentRenterPoints);
+
 		return stmt;
 	}
 
@@ -74,24 +73,21 @@ public class Customer {
 
 	public double computeRentalAmount(Rental rental) {
 		double amount = 0;
-		switch( rental.getMovie().getPriceCode() ) {
-			case Movie.REGULAR:
+		switch (rental.getMovie().getPriceCode()) {
+			case Movie.REGULAR -> {
 				amount = 2;
 				if (rental.getDaysRented() > 2) {
 					amount += 1.5 * (rental.getDaysRented() - 2);
 				}
-				break;
-			case Movie.CHILDRENS:
+			}
+			case Movie.CHILDRENS -> {
 				amount = 1.5;
 				if (rental.getDaysRented() > 3) {
 					amount += 1.5 * (rental.getDaysRented() - 3);
 				}
-				break;
-			case Movie.NEW_RELEASE:
-				amount = 3*rental.getDaysRented();
-				break;
-			default:
-				getLogger().warning("Movie "+rental.getMovie()+" has unrecognized priceCode "+rental.getMovie().getPriceCode());
+			}
+			case Movie.NEW_RELEASE -> amount = 3 * rental.getDaysRented();
+			default -> getLogger().warning("Movie " + rental.getMovie() + " has unrecognized priceCode " + rental.getMovie().getPriceCode());
 		}
 		rental.setCharge(amount);
 		return amount;
