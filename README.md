@@ -18,8 +18,6 @@ et predicates.
 - [Exemples de Predicates Java](https://mkyong.com/java8/java-8-predicate-examples/)
 - [Liste des nouvelles fonctionnalités disponibles depuis Java 8](https://ondro.inginea.eu/index.php/new-features-in-java-versions-since-java-8/)
 
-Certains exercices sont inspirés de la formation dispensée par José Paumard (Using Java Streams to Process and Analyze Data in Memory).
-
 Le package `movierental` se base sur l'exercice de refactoring du même nom de Martin Fowler.
 
 Le package `hiking` se base sur des données de l'[Open Data de Nantes](https://data.nantesmetropole.fr/pages/home/), et
