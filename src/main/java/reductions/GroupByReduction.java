@@ -18,7 +18,7 @@ public class GroupByReduction {
                 new City("Noirmoutier", "Pays de la Loire", 4614, 19970));
 
         // Collecter cette liste en une map regroupant les villes par région
-        Map<String, List<City>> citiesByRegion;
+        Map<String, List<City>> citiesByRegion = null;
 
         System.out.println("# cities = " + citiesByRegion.size());
         // Afficher les villes de la région Pays de la Loire
@@ -30,11 +30,11 @@ public class GroupByReduction {
 
 
         // Déterminer la région possédant le plus de villes
-        Map.Entry<String, Long> regionWithMostCities;
+        Map.Entry<String, Long> regionWithMostCities = null;
         System.out.println(regionWithMostCities);
 
         // Collecter la population de la région Alsace
-        int alsacePopulation;
+        int alsacePopulation = 0;
         System.out.println(alsacePopulation);
 
         // Collecter la population de chaque région
