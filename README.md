@@ -2,28 +2,25 @@
 
 Le but de ces katas est de découvrir les fonctionnalités ajoutées au langage Java (et outils ajoutés au JDK) depuis la version 8 de Java.
 
-Chaque sous répertoire correspond à un mini-projet de tests, qui doivent être modifiés en fonction des instructions fournies dans le code, afin de valider les tests unitaires. Les solutions sont disponibles sur la branche `solutions`.
+Chaque sous-répertoire correspond à un mini-projet, avec une méthode `main` qui doivent être modifiés en fonction des 
+instructions fournies dans le code, afin de voir les résultats s'afficher correctement. 
+Les solutions sont disponibles sur la branche `solutions`.
 
 ## Fonctionnalités couvertes
 
-Voici la liste des fonctionnalités couvertes par les katas de code.
+Cette première version couvre principalement les Streams Java, mais aussi les multi-lines Strings, method reference
+et predicates.
 
-### Concaténation de strings
+### Ressources externes utiles
 
-Le projet de concaténation de strings sert à couvrir divers ajouts et API :
+- [Micro-katas sur les streams](https://www.codingame.com/playgrounds/20782/java-guild-meeting-52018/streams---micro-katas)
+- [Exemples de katas Java](https://github.com/c-guntur/java-katas)
+- [Exemples de Predicates Java](https://mkyong.com/java8/java-8-predicate-examples/)
+- [Liste des nouvelles fonctionnalités disponibles depuis Java 8](https://ondro.inginea.eu/index.php/new-features-in-java-versions-since-java-8/)
 
-* StringJoiner
-* Stream API
-* String
+Certains exercices sont inspirés de la formation dispensée par José Paumard (Using Java Streams to Process and Analyze Data in Memory).
 
-### Location de films ()
+Le package `movierental` se base sur l'exercice de refactoring du même nom de Martin Fowler.
 
-https://www.codingame.com/playgrounds/20782/java-guild-meeting-52018/streams---micro-katas
-https://github.com/c-guntur/java-katas
-https://mkyong.com/java8/java-8-predicate-examples/
-https://github.com/Gi11i4m/playground-java-guild-5-2018
-https://ondro.inginea.eu/index.php/new-features-in-java-versions-since-java-8/
-
-### Fonctionnalités
-
-Date Time API
+Le package `hiking` se base sur des données de l'[Open Data de Nantes](https://data.nantesmetropole.fr/pages/home/), et
+notamment ses données sur les [chemins de promenades et randonnées de Loire-Atlantique](https://data.nantesmetropole.fr/explore/dataset/224400028_itineraires-de-promenade-et-de-randonnee-en-loire-atlantique-pdipr%40loireatlantique).
