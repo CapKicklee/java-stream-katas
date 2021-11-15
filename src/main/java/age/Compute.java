@@ -1,6 +1,7 @@
 package age;
 
 import java.util.List;
+import java.util.OptionalDouble;
 
 public class Compute {
 
@@ -13,22 +14,23 @@ public class Compute {
 
         List<Person> people = List.of(p01, p02, p03, p04);
 
-        int sum = 0;
-        int count = 0;
+        // version sans optional (exception si filter renvoie un stream vide)
+        double average =
+                people.stream()
+                        .mapToInt(Person::getAge)
+                        .filter(age -> age > 20)
+                        .average()
+                        .orElseThrow();
 
-        for (Person person: people) {
-            if (person.getAge() > 20) {
-                count++;
-                sum += person.getAge();
-            }
-        }
-
-        double average = 0d;
-        if (count > 0) {
-            average = sum / count;
-        }
+        // version avec optional (optional vide si filter renvoie un stream vide)
+        OptionalDouble optionalAverage =
+                people.stream()
+                        .mapToInt(Person::getAge)
+                        .filter(age -> age > 20)
+                        .average();
 
         System.out.println("Average = " + average);
+        System.out.println("Optional Average = " + (optionalAverage.isPresent() ? optionalAverage.getAsDouble() : "N/A"));
     }
 
 }
