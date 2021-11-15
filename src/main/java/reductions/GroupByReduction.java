@@ -38,7 +38,7 @@ public class GroupByReduction {
         System.out.println(alsacePopulation);
 
         // Collecter la population de chaque région
-        Map<String, Long> populationOfCitiesPerRegion;
+        Map<String, Integer> populationOfCitiesPerRegion;
 
         // Afficher la population de la région de votre choix
 
