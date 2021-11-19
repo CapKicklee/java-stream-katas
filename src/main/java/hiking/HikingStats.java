@@ -61,7 +61,7 @@ public class HikingStats {
 
         System.out.println("Number of difficulties = " + trailsByDifficulty.size());
         System.out.println("Difficulties = " + trailsByDifficulty.keySet());
-        System.out.println("Number of difficult trails = " + trailsByDifficulty.get("Difficile").size());
+        System.out.println("Number of difficult trails = " + trailsByDifficulty.get(3).size());
 
         // Afficher les statistiques basiques associées à la longueur des chemins de randonnées (nombre, somme, min, max, moyenne)
         System.out.println(trails.stream().mapToDouble(HikingTrail::getLength).summaryStatistics());
